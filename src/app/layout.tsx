@@ -7,7 +7,19 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-body", weight: ["300
 
 export const metadata: Metadata = {
   title: "Gian Carlo Yabut | Full Stack Developer",
-  description: "High-End Tech Noir Minimalist Portfolio of Gian Carlo Yabut.",
+  description: "Enterprise-grade Full Stack Developer based in Manila, PH. 13+ years building billing systems, eHealth platforms, and SAAS applications.",
+  openGraph: {
+    title: "Gian Carlo Yabut | Full Stack Developer",
+    description: "Enterprise Full Stack Developer — Manila, PH",
+    url: "https://gianyabut.github.io/myProfile",
+    images: [{ url: "/hero.png", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Gian Carlo Yabut | Full Stack Developer",
+    images: ["/hero.png"],
+  },
 };
 
 export default function RootLayout({

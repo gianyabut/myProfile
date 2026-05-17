@@ -1,8 +1,18 @@
-import { ArrowRight, Award } from 'lucide-react';
+"use client";
+
+import { useState } from 'react';
+import { ArrowRight, Award, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import ChatWidget from '@/components/ChatWidget';
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Email obfuscation to prevent spam scraping
+  const contactEmail = () => {
+    window.location.href = `mailto:gian.yabut${'@'}yahoo.com`;
+  };
+
   return (
     <main>
       {/* Navbar */}
@@ -11,10 +21,20 @@ export default function Home() {
           <div className="logo">
             GCY<span>.</span>
           </div>
-          <div className="nav-links">
-            <a href="#about" className="nav-link">About</a>
-            <a href="#experience" className="nav-link">Experience</a>
-            <a href="#portfolio" className="nav-link">Portfolio</a>
+          
+          <button 
+            className="mobile-menu-btn" 
+            style={{ display: 'none' /* Handled by CSS media query */ }}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+            <a href="#about" className="nav-link" onClick={() => setMobileMenuOpen(false)}>About</a>
+            <a href="#experience" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Experience</a>
+            <a href="#portfolio" className="nav-link" onClick={() => setMobileMenuOpen(false)}>Portfolio</a>
           </div>
         </div>
       </nav>
@@ -37,7 +57,14 @@ export default function Home() {
           </div>
           <div className="hero-right">
             <div className="hero-image-wrapper" style={{ width: '100%', height: '100%', position: 'relative' }}>
-              <img src="/hero.png" alt="Abstract architectural shape" className="hero-image" />
+              <Image 
+                src="/hero.png" 
+                alt="Abstract architectural shape" 
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="hero-image" 
+              />
             </div>
             {/* Intentional negative space / small detail */}
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', position: 'absolute', bottom: '1rem', right: '1rem', zIndex: 10 }}>
@@ -56,7 +83,13 @@ export default function Home() {
           </div>
           <div className="about-grid">
             <div className="about-image-wrapper">
-              <img src="/about.png" alt="Abstract portrait" className="about-image" />
+              <Image 
+                src="/about.png" 
+                alt="Abstract portrait" 
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="about-image" 
+              />
             </div>
 
             <div className="about-content">
@@ -191,8 +224,14 @@ export default function Home() {
           <div className="portfolio-grid">
             {/* Card 1 */}
             <div className="portfolio-card">
-              <div className="portfolio-image-placeholder">
-                <img src="/port1.png" alt="Data Flow" className="portfolio-image" />
+              <div className="portfolio-image-placeholder" style={{ position: 'relative' }}>
+                <Image 
+                  src="/port1.png" 
+                  alt="Data Flow" 
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="portfolio-image" 
+                />
               </div>
               <div className="portfolio-meta">
                 <h3 className="portfolio-title">Enterprise Dashboard</h3>
@@ -201,8 +240,14 @@ export default function Home() {
             </div>
             {/* Card 2 */}
             <div className="portfolio-card">
-              <div className="portfolio-image-placeholder">
-                <img src="/port2.png" alt="Geometric Network" className="portfolio-image" />
+              <div className="portfolio-image-placeholder" style={{ position: 'relative' }}>
+                <Image 
+                  src="/port2.png" 
+                  alt="Geometric Network" 
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="portfolio-image" 
+                />
               </div>
               <div className="portfolio-meta">
                 <h3 className="portfolio-title">Scalable Billing API</h3>
@@ -222,9 +267,9 @@ export default function Home() {
               <span style={{ fontStyle: 'italic', color: 'var(--accent-orange)' }}>something exceptional.</span>
             </div>
             <div className="footer-links">
-              <a href="mailto:gian.yabut@yahoo.com" className="footer-link">
+              <button onClick={contactEmail} className="footer-link" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>
                 Email <ArrowRight size={16} />
-              </a>
+              </button>
               <a href="https://www.linkedin.com/in/gian-carlo-yabut-a53b9566" target="_blank" rel="noopener noreferrer" className="footer-link">
                 LinkedIn <ArrowRight size={16} />
               </a>
