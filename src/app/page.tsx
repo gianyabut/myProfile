@@ -1,5 +1,6 @@
 import { ArrowRight, Award } from 'lucide-react';
 import Image from 'next/image';
+import ChatWidget from '@/components/ChatWidget';
 
 export default function Home() {
   return (
@@ -235,6 +236,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {/* Digital Twin AI */}
+      <ChatWidget />
     </main>
   );
 }
